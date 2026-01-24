@@ -1,0 +1,141 @@
+Directory structure
+
+Jekyll theme lives in something like:
+
+jekyll-theme-gitdigital/
+├── _layouts/
+│   └── default.html
+├── assets/
+│   └── css/
+│       └── style.css
+├── _includes/
+│   └── header.html
+│   └── footer.html
+└── theme.gemspec
+
+
+---
+
+```html
+_layouts/default.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>{{ page.title | default: site.title }}</title>
+  <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+</head>
+<body>
+
+  {% include header.html %}
+
+  <main id="content">
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+
+</body>
+</html>
+```
+
+---
+```html
+_includes/header.html
+
+<header class="site-header">
+  <h1><a href="{{ "/" | relative_url }}">{{ site.title }}</a></h1>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+  </nav>
+</header>
+```
+
+---
+
+```html
+_includes/footer.html
+
+<footer class="site-footer">
+  <p>&copy; {{ site.time | date: "%Y" }} {{ site.title }} • Built with Jekyll</p>
+</footer>
+```
+
+---
+
+```css
+assets/css/style.css
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fafafa;
+  color: #111;
+}
+.site-header {
+  background: #222;
+  padding: 1rem 2rem;
+  color: #fff;
+}
+.site-header a {
+  color: #fff;
+  margin-right: 1rem;
+  text-decoration: none;
+}
+.site-footer {
+  background: #222;
+  color: #eee;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+```
+
+---
+
+🏠 index.html for Jekyll site
+
+Here’s the main content page — drop this in the GitHub Pages repo (the one for the site):
+
+```jekyll
+layout: default
+title: Codespaces React + Jekyll
+---
+
+<section class="hero">
+  <h2>Welcome to Codespaces React + Jekyll</h2>
+  <p>React <strong>and</strong> Jekyll? Yeah, we mix the static and dynamic — or just document the React app here!</p>
+  <button id="btnClick">Click Me</button>
+</section>
+
+<script>
+  document.getElementById("btnClick").addEventListener("click", () => {
+    alert("Jekyll + JavaScript on deck 🤘");
+  });
+</script>
+
+<style>
+  .hero {
+    text-align: center;
+    margin-top: 5rem;
+  }
+  button {
+    padding: .5rem 1rem;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  button:hover {
+    background: #0056b3;
+  }
+</style>
+```
+
+~~~
+This gives it some interactive JavaScript in the Jekyll page without needing React — 
